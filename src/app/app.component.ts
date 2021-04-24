@@ -1,5 +1,6 @@
 import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { ProductListComponent } from "./product-list/product-list.component";
+import { BackendService } from "./backend.service";
 
 @Component({
   selector: 'app-root',
@@ -7,25 +8,14 @@ import { ProductListComponent } from "./product-list/product-list.component";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterViewInit{
-  title = 'angular29-lab2';
+  title = 'angular30-lab1';
 
   @ViewChild('productList')
   productList: ProductListComponent;
 
+  constructor(private backendService: BackendService){  }
+
   ngAfterViewInit(){
-    this.productList.products = [
-      {
-        name: "ส้มโอ",
-        price: 500
-      },
-      {
-        name: "แตงโม",
-        price: 5000
-      },
-      {
-        name: "มะพร้าว",
-        price: 900
-      }
-    ];
+    this.productList.products = this.backendService.getProducts();
   }
 }
